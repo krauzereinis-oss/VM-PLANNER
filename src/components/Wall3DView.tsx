@@ -91,7 +91,7 @@ export function Wall3DView({ section }: Props) {
             );
           })}
 
-          <OrbitControls enablePan={false} minDistance={1.5} maxDistance={widthM * 3} />
+          <OrbitControls enablePan={false} rotateSpeed={0.4} minDistance={1.5} maxDistance={widthM * 3} />
         </Suspense>
       </Canvas>
     </div>
