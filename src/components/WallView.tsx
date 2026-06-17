@@ -6,18 +6,26 @@ const PX_PER_METER = 220;
 // geometry right against the reference sketches before anything else.
 const HEIGHT_LEVELS = [2.2, 2.1, 2.0, 1.2, 1.1, 1.0] as const;
 
-// Schematic (not literal metric) vertical scale: every gap between
-// consecutive height lines — and the bottom margin below the lowest line
-// (1.0m) — is sized the same: just enough to hang one row of garments. No
-// special wider gap between clusters; garments hang below every line,
-// including 1.0m, so that row needs as much clearance as any other.
+// Schematic (not literal metric) vertical scale: lines within a cluster
+// (2.0/2.1/2.2 and 1.0/1.1/1.2) sit almost touching — they're mounting
+// points on the same upright — while the gap between the 2.0 and 1.2 lines
+// is a real merchandising row, sized to hang a garment.
 const TOP_MARGIN_PX = 24;
-const ROW_GAP_PX = 100;
+const TIGHT_GAP_PX = 22;
+const CLUSTER_GAP_PX = 170;
+const BOTTOM_MARGIN_PX = 170;
 
 const HEIGHT_Y: Record<number, number> = (() => {
   const y: Record<number, number> = {};
+  let cursor = TOP_MARGIN_PX;
   HEIGHT_LEVELS.forEach((height, i) => {
-    y[height] = TOP_MARGIN_PX + i * ROW_GAP_PX;
+    if (i === 0) {
+      y[height] = cursor;
+    } else {
+      const prev = HEIGHT_LEVELS[i - 1];
+      cursor += prev - height > 0.5 ? CLUSTER_GAP_PX : TIGHT_GAP_PX;
+      y[height] = cursor;
+    }
   });
   return y;
 })();
@@ -32,7 +40,7 @@ interface Props {
 
 export function WallView({ section }: Props) {
   const widthM = section.endMeter - section.startMeter;
-  const gridHeight = yForHeight(HEIGHT_LEVELS[HEIGHT_LEVELS.length - 1]) + ROW_GAP_PX;
+  const gridHeight = yForHeight(HEIGHT_LEVELS[HEIGHT_LEVELS.length - 1]) + BOTTOM_MARGIN_PX;
 
   return (
     <div className="wall-view">
