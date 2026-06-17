@@ -268,7 +268,10 @@ button[type="submit"],
   left: 0;
   right: 0;
   border-top: 2px solid #aab0c0;
-  z-index: 1;
+}
+
+.height-line.mount-line {
+  z-index: 2;
 }
 
 .height-labels {
@@ -306,6 +309,7 @@ button[type="submit"],
 
 .pants-mount {
   position: absolute;
+  z-index: 1;
 }
 
 .pants-mount svg {

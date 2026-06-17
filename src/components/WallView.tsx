@@ -13,6 +13,10 @@ const PANTS_HEM_CLEARANCE_PX = 10;
 // geometry right against the reference sketches before anything else.
 const HEIGHT_LEVELS = [2.2, 2.1, 2.0, 1.2, 1.1, 1.0] as const;
 
+// Pants only ever hang from these two lines, so only these stay visible
+// where a pants icon overlaps the rest of their cluster (2.1/2.0, 1.1/1.0).
+const MOUNT_HEIGHTS = new Set([2.2, 1.2]);
+
 // Schematic (not literal metric) vertical scale: lines within a cluster
 // (2.0/2.1/2.2 and 1.0/1.1/1.2) sit almost touching — they're mounting
 // points on the same upright — while the gap between the 2.0 and 1.2 lines
@@ -74,7 +78,11 @@ export function WallView({ section }: Props) {
             <div className="wall-border wall-border-top" style={{ top: 0 }} />
             <div className="wall-border wall-border-bottom" style={{ top: gridHeight }} />
             {HEIGHT_LEVELS.map((height) => (
-              <div key={height} className="height-line" style={{ top: yForHeight(height) }} />
+              <div
+                key={height}
+                className={`height-line${MOUNT_HEIGHTS.has(height) ? " mount-line" : ""}`}
+                style={{ top: yForHeight(height) }}
+              />
             ))}
             {Array.from({ length: Math.floor(widthM) + 1 }).map((_, i) => (
               <div key={`m-${i}`} className="upright" style={{ left: i * PX_PER_METER }} />
