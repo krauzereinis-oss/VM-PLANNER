@@ -6,11 +6,14 @@ import { WallSetupPanel } from "./components/WallSetupPanel";
 import { GarmentForm } from "./components/GarmentForm";
 import { GarmentList } from "./components/GarmentList";
 import { WallView } from "./components/WallView";
+import { Wall3DView } from "./components/Wall3DView";
 
 type Tab = "wall" | "add" | "garments" | "setup";
+type WallMode = "2d" | "3d";
 
 function App() {
   const [tab, setTab] = useState<Tab>("wall");
+  const [wallMode, setWallMode] = useState<WallMode>("2d");
   const [sections, setSections] = useState<WallSection[]>([]);
   const [garments, setGarments] = useState<Garment[]>([]);
 
@@ -52,9 +55,19 @@ function App() {
             {sections.length === 0 && (
               <p className="hint">No wall sections yet — add one in Wall Setup to get started.</p>
             )}
-            {sections.map((s) => (
-              <WallView key={s.id} section={s} />
-            ))}
+            {sections.length > 0 && (
+              <div className="wall-mode-toggle">
+                <button className={wallMode === "2d" ? "active" : ""} onClick={() => setWallMode("2d")}>
+                  2D
+                </button>
+                <button className={wallMode === "3d" ? "active" : ""} onClick={() => setWallMode("3d")}>
+                  3D
+                </button>
+              </div>
+            )}
+            {sections.map((s) =>
+              wallMode === "2d" ? <WallView key={s.id} section={s} /> : <Wall3DView key={s.id} section={s} />
+            )}
           </div>
         )}
       </main>
