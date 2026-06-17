@@ -1,7 +1,7 @@
 import type { WallSection } from "../types/domain";
 import { PantsIcon } from "./icons";
 
-const PX_PER_METER = 220;
+const PX_PER_METER = 340;
 
 // Pants always take 0.25m of horizontal hanging space, regardless of which
 // mount they hang from.
