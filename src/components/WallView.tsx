@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import type { Garment, WallSection, WallSlot } from "../types/domain";
 import { HEIGHT_LEVELS, assignGarments, generateSkeleton } from "../rules/wallEngine";
-import { useObjectUrl } from "../utils/useObjectUrl";
 import { CATEGORY_COLORS } from "../utils/constants";
+import { FrontIcon, PantsIcon, ShelfIcon, SidewaysIcon } from "./icons";
 
 const PX_PER_METER = 220;
-const ROW_HEIGHT_PX = 110;
+const ROW_HEIGHT_PX = 90;
 
 interface Props {
   section: WallSection;
@@ -55,14 +55,21 @@ export function WallView({ section, garments }: Props) {
           <div key={i} className="upright" style={{ left: i * PX_PER_METER }} />
         ))}
       </div>
+      <PlanogramLegend />
     </div>
   );
+}
+
+function fillColour(garment: Garment | undefined): string | undefined {
+  if (!garment) return undefined;
+  const guess = garment.colour.split(" ")[0].toLowerCase();
+  return guess || CATEGORY_COLORS[garment.category];
 }
 
 function SlotView({ slot, garments }: { slot: WallSlot; garments: Garment[] }) {
   const garment = slot.garmentId ? garments.find((g) => g.id === slot.garmentId) : undefined;
   const behind = slot.behindGarmentId ? garments.find((g) => g.id === slot.behindGarmentId) : undefined;
-  const url = useObjectUrl(garment?.imageBlobId);
+  const colour = fillColour(garment) ?? (garment ? CATEGORY_COLORS[garment.category] : "#444");
 
   if (slot.allowed === "Shelf") {
     return (
@@ -70,7 +77,9 @@ function SlotView({ slot, garments }: { slot: WallSlot; garments: Garment[] }) {
         className="slot shelf-slot"
         style={{ left: slot.x * PX_PER_METER, width: slot.width * PX_PER_METER }}
         title={`Shelf · ${slot.height}m · ${slot.metalType} · folded stock`}
-      />
+      >
+        <ShelfIcon faded={!garment} />
+      </div>
     );
   }
 
@@ -78,19 +87,77 @@ function SlotView({ slot, garments }: { slot: WallSlot; garments: Garment[] }) {
     ? `${garment.category} · ${garment.colour} · ${slot.height}m · ${slot.width}m · ${slot.metalType}`
     : `Empty · ${slot.allowed.join("/")} · ${slot.height}m · ${slot.width}m · ${slot.metalType}`;
 
+  const category = garment?.category ?? (Array.isArray(slot.allowed) ? slot.allowed[0] : undefined);
+  let icon = null;
+  if (slot.metalType === "DBar") {
+    icon = <SidewaysIcon width={slot.width} colour={colour} faded={!garment} />;
+  } else if (category === "Pants" || category === "Shorts") {
+    icon = <PantsIcon width={slot.width} colour={colour} faded={!garment} />;
+  } else {
+    icon = <FrontIcon width={slot.width} colour={colour} faded={!garment} />;
+  }
+
   return (
     <div
       className={`slot${garment ? "" : " empty-slot"}`}
-      style={{
-        left: slot.x * PX_PER_METER,
-        width: slot.width * PX_PER_METER,
-        backgroundColor: garment ? undefined : "transparent",
-        borderColor: garment ? CATEGORY_COLORS[garment.category] : "#444",
-      }}
+      style={{ left: slot.x * PX_PER_METER, width: slot.width * PX_PER_METER }}
       title={tooltip}
     >
-      {garment && url && <img src={url} alt={garment.subtype} />}
-      {behind && <span className="layer-indicator" title={`Layered behind: ${behind.category}`}>⊞</span>}
+      {icon}
+      {behind && (
+        <span className="layer-indicator" title={`Layered behind: ${behind.category}`}>
+          ⊞
+        </span>
+      )}
+    </div>
+  );
+}
+
+function PlanogramLegend() {
+  return (
+    <div className="legend">
+      <div className="legend-box">
+        <h4>Symbols</h4>
+        <div className="legend-row">
+          <FrontIcon width={0.25} colour="#888" />
+          <span>Front 0.25m</span>
+        </div>
+        <div className="legend-row">
+          <FrontIcon width={0.5} colour="#888" />
+          <span>Front 0.5m</span>
+        </div>
+        <div className="legend-row">
+          <PantsIcon width={0.25} colour="#888" />
+          <span>Pants/Shorts 0.25m</span>
+        </div>
+        <div className="legend-row">
+          <SidewaysIcon width={0.25} colour="#888" />
+          <span>Sideways 0.25m (D-Bar)</span>
+        </div>
+        <div className="legend-row">
+          <ShelfIcon />
+          <span>Folded stock (Shelf)</span>
+        </div>
+      </div>
+      <div className="legend-box">
+        <h4>Metal</h4>
+        <div className="legend-row">
+          <span className="metal-swatch" />
+          <span>Angle Arm — 2.2m</span>
+        </div>
+        <div className="legend-row">
+          <span className="metal-swatch" />
+          <span>Stepper / D-Bar — 2.0m, 1.0m</span>
+        </div>
+        <div className="legend-row">
+          <span className="metal-swatch" />
+          <span>Stepper — 1.2m</span>
+        </div>
+        <div className="legend-row">
+          <span className="metal-swatch" />
+          <span>Shelf — 2.1m, 1.1m</span>
+        </div>
+      </div>
     </div>
   );
 }
