@@ -5,7 +5,19 @@ import { CATEGORY_COLORS } from "../utils/constants";
 import { FrontIcon, PantsIcon, ShelfIcon, SidewaysIcon } from "./icons";
 
 const PX_PER_METER = 220;
-const ROW_HEIGHT_PX = 90;
+
+// True-to-scale vertical axis: each height level sits at its real-world metre
+// position, which is what produces the reference planogram's two tight
+// clusters (2.0–2.2m, 1.0–1.2m) separated by a large gap, rather than 6 evenly
+// stacked rows.
+const PX_PER_METER_V = 900;
+const WALL_TOP_M = 2.3;
+const WALL_BOTTOM_M = 0.85;
+const ROW_BAND_PX = 90;
+
+function yForHeight(height: number): number {
+  return (WALL_TOP_M - height) * PX_PER_METER_V;
+}
 
 interface Props {
   section: WallSection;
@@ -21,6 +33,7 @@ export function WallView({ section, garments }: Props) {
 
   const widthM = section.endMeter - section.startMeter;
   const unplaced = garments.filter((g) => unplacedGarmentIds.includes(g.id));
+  const gridHeight = (WALL_TOP_M - WALL_BOTTOM_M) * PX_PER_METER_V;
 
   return (
     <div className="wall-view">
@@ -33,15 +46,14 @@ export function WallView({ section, garments }: Props) {
           {unplaced.length} garment(s) could not be placed — extend this wall section to fit them.
         </div>
       )}
-      <div
-        className="wall-grid"
-        style={{ width: widthM * PX_PER_METER, height: ROW_HEIGHT_PX * HEIGHT_LEVELS.length }}
-      >
-        {HEIGHT_LEVELS.map((height, rowIndex) => (
+      <div className="wall-grid" style={{ width: widthM * PX_PER_METER, height: gridHeight }}>
+        <div className="wall-border wall-border-top" style={{ top: 0 }} />
+        <div className="wall-border wall-border-bottom" style={{ top: gridHeight }} />
+        {HEIGHT_LEVELS.map((height) => (
           <div
             key={height}
             className="wall-row"
-            style={{ top: rowIndex * ROW_HEIGHT_PX, height: ROW_HEIGHT_PX }}
+            style={{ top: yForHeight(height) - ROW_BAND_PX / 2, height: ROW_BAND_PX }}
           >
             <span className="row-label">{height}m</span>
             {slots
@@ -52,8 +64,13 @@ export function WallView({ section, garments }: Props) {
           </div>
         ))}
         {Array.from({ length: Math.floor(widthM) + 1 }).map((_, i) => (
-          <div key={i} className="upright" style={{ left: i * PX_PER_METER }} />
+          <div key={`m-${i}`} className="upright" style={{ left: i * PX_PER_METER }} />
         ))}
+        {Array.from({ length: Math.floor(widthM * 2) }).map((_, i) => {
+          const meterPos = i * 0.5;
+          if (Number.isInteger(meterPos)) return null;
+          return <div key={`h-${i}`} className="upright-half" style={{ left: meterPos * PX_PER_METER }} />;
+        })}
       </div>
       <PlanogramLegend />
     </div>

@@ -251,6 +251,22 @@ button[type="submit"],
   background: #3a3b46;
 }
 
+.upright-half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  border-left: 1px dashed #2e303a;
+}
+
+.wall-border {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #4a4b56;
+}
+
 .slot {
   position: absolute;
   top: 2px;
