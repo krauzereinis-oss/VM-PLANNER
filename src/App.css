@@ -216,6 +216,13 @@ button[type="submit"],
 
 .wall-view {
   margin-bottom: 32px;
+}
+
+.wall-grid-row {
+  display: flex;
+}
+
+.wall-scroll {
   overflow-x: auto;
 }
 
@@ -233,13 +240,20 @@ button[type="submit"],
   border-top: 2px solid #aab0c0;
 }
 
+.height-labels {
+  position: relative;
+  flex-shrink: 0;
+  width: 40px;
+  margin-right: 6px;
+}
+
 .row-label {
   position: absolute;
-  left: -42px;
-  top: 4px;
+  left: 0;
+  right: 0;
+  top: -6px;
   font-size: 11px;
   color: #889;
-  width: 36px;
   text-align: right;
 }
 

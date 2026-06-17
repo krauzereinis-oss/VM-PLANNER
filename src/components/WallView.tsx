@@ -48,22 +48,31 @@ export function WallView({ section }: Props) {
         {section.brand} — {section.startMeter}m to {section.endMeter}m{" "}
         {section.isComplete ? "" : "(partial, flowing left-to-right)"}
       </h3>
-      <div className="wall-grid" style={{ width: widthM * PX_PER_METER, height: gridHeight }}>
-        <div className="wall-border wall-border-top" style={{ top: 0 }} />
-        <div className="wall-border wall-border-bottom" style={{ top: gridHeight }} />
-        {HEIGHT_LEVELS.map((height) => (
-          <div key={height} className="height-line" style={{ top: yForHeight(height) }}>
-            <span className="row-label">{height}m</span>
+      <div className="wall-grid-row">
+        <div className="height-labels" style={{ height: gridHeight }}>
+          {HEIGHT_LEVELS.map((height) => (
+            <span key={height} className="row-label" style={{ top: yForHeight(height) }}>
+              {height}m
+            </span>
+          ))}
+        </div>
+        <div className="wall-scroll">
+          <div className="wall-grid" style={{ width: widthM * PX_PER_METER, height: gridHeight }}>
+            <div className="wall-border wall-border-top" style={{ top: 0 }} />
+            <div className="wall-border wall-border-bottom" style={{ top: gridHeight }} />
+            {HEIGHT_LEVELS.map((height) => (
+              <div key={height} className="height-line" style={{ top: yForHeight(height) }} />
+            ))}
+            {Array.from({ length: Math.floor(widthM) + 1 }).map((_, i) => (
+              <div key={`m-${i}`} className="upright" style={{ left: i * PX_PER_METER }} />
+            ))}
+            {Array.from({ length: Math.floor(widthM * 2) }).map((_, i) => {
+              const meterPos = i * 0.5;
+              if (Number.isInteger(meterPos)) return null;
+              return <div key={`h-${i}`} className="upright-half" style={{ left: meterPos * PX_PER_METER }} />;
+            })}
           </div>
-        ))}
-        {Array.from({ length: Math.floor(widthM) + 1 }).map((_, i) => (
-          <div key={`m-${i}`} className="upright" style={{ left: i * PX_PER_METER }} />
-        ))}
-        {Array.from({ length: Math.floor(widthM * 2) }).map((_, i) => {
-          const meterPos = i * 0.5;
-          if (Number.isInteger(meterPos)) return null;
-          return <div key={`h-${i}`} className="upright-half" style={{ left: meterPos * PX_PER_METER }} />;
-        })}
+        </div>
       </div>
     </div>
   );
