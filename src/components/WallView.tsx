@@ -1,6 +1,8 @@
 import type { WallSection } from "../types/domain";
+import { PantsIcon } from "./icons";
 
 const PX_PER_METER = 220;
+const SLOT_WIDTH_M = 0.5;
 
 // Bare grid only, no garments/icons — getting the metal-line/meter-line
 // geometry right against the reference sketches before anything else.
@@ -41,6 +43,9 @@ interface Props {
 export function WallView({ section }: Props) {
   const widthM = section.endMeter - section.startMeter;
   const gridHeight = yForHeight(HEIGHT_LEVELS[HEIGHT_LEVELS.length - 1]) + BOTTOM_MARGIN_PX;
+  const pantsRowTop = yForHeight(1.2);
+  const pantsRowHeight = gridHeight - pantsRowTop;
+  const pantsSlotCount = Math.floor(widthM / SLOT_WIDTH_M);
 
   return (
     <div className="wall-view">
@@ -71,6 +76,13 @@ export function WallView({ section }: Props) {
               if (Number.isInteger(meterPos)) return null;
               return <div key={`h-${i}`} className="upright-half" style={{ left: meterPos * PX_PER_METER }} />;
             })}
+            <div className="garment-row" style={{ top: pantsRowTop, height: pantsRowHeight }}>
+              {Array.from({ length: pantsSlotCount }).map((_, i) => (
+                <div key={`pants-${i}`} className="garment-slot" style={{ width: SLOT_WIDTH_M * PX_PER_METER }}>
+                  <PantsIcon width={0.5} colour="#3a5a78" height={pantsRowHeight - 16} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
