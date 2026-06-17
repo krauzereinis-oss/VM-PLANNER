@@ -357,7 +357,27 @@ button[type="submit"],
   color: #ffd9a0;
 }
 
-/* Marks a mount where the stepper is carrying 2 SKUs side by side, per the
+/* Stepper's arm is Z-shaped: a 2nd SKU hangs behind the first in the same
+   0.25m slot rather than next to it, so just offset it a little to peek out. */
+.stepper-2sku {
+  overflow: visible;
+}
+
+.stepper-2sku-back {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 1;
+}
+
+.stepper-2sku-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+/* Marks a mount where the stepper is carrying 2 SKUs in the same slot, per the
    rule that a 2-SKU stepper must always show a "2" somewhere on the garment. */
 .sku-badge {
   position: absolute;

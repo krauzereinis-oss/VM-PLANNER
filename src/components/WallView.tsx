@@ -96,16 +96,19 @@ export function WallView({ section }: Props) {
             <div className="pants-mount" style={{ top: yForHeight(2.2), left: pantsLeft }}>
               <PantsIcon widthPx={pantsWidthPx} colour="#f0f0f0" height={angleArmPantsHeight} />
             </div>
-            {/* Stepper @ 1.2 — 2 SKUs side by side, each still exactly 0.25m;
-                a stepper showing 2 SKUs must always carry a "2" marker. */}
+            {/* Stepper @ 1.2 — the stepper arm is Z-shaped, so 2 SKUs share the
+                same 0.25m slot, one hung in front and one behind (not side by
+                side); a stepper showing 2 SKUs must always carry a "2" marker. */}
             <div
-              className="pants-mount"
-              style={{ top: yForHeight(1.2), left: pantsLeft, width: pantsWidthPx * 2 }}
+              className="pants-mount stepper-2sku"
+              style={{ top: yForHeight(1.2), left: pantsLeft, width: pantsWidthPx }}
             >
               <span className="sku-badge">2</span>
-              <div style={{ display: "flex" }}>
+              <div className="stepper-2sku-back">
+                <PantsIcon widthPx={pantsWidthPx} colour="#9a9ea8" height={stepperPantsHeight} />
+              </div>
+              <div className="stepper-2sku-front">
                 <PantsIcon widthPx={pantsWidthPx} colour="#f0f0f0" height={stepperPantsHeight} />
-                <PantsIcon widthPx={pantsWidthPx} colour="#cfd0d6" height={stepperPantsHeight} />
               </div>
             </div>
           </div>
