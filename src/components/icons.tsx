@@ -15,7 +15,13 @@ const STROKE = "#1a1b21";
 export function FrontIcon({ width, colour = "#888", faded, height = 64 }: IconProps) {
   const w = (width === 0.5 ? 64 : 32) * (height / 64);
   return (
-    <svg viewBox="0 0 64 64" width={w} height={height} opacity={faded ? 0.35 : 1}>
+    <svg
+      viewBox="0 0 64 64"
+      width={w}
+      height={height}
+      opacity={faded ? 0.35 : 1}
+      preserveAspectRatio="xMidYMin meet"
+    >
       <path
         d="M22 6 L28 4 L32 9 L36 4 L42 6 L56 16 L48 28 L42 22 L42 60 L22 60 L22 22 L16 28 L8 16 Z"
         fill={colour}
@@ -30,7 +36,13 @@ export function FrontIcon({ width, colour = "#888", faded, height = 64 }: IconPr
 export function PantsIcon({ width, colour = "#888", faded, height = 64 }: IconProps) {
   const w = (width === 0.5 ? 64 : 32) * (height / 64);
   return (
-    <svg viewBox="0 0 64 64" width={w} height={height} opacity={faded ? 0.35 : 1}>
+    <svg
+      viewBox="0 0 64 64"
+      width={w}
+      height={height}
+      opacity={faded ? 0.35 : 1}
+      preserveAspectRatio="xMidYMin meet"
+    >
       <path
         d="M18 4 H46 L44 60 L34 60 L32 24 L30 60 L20 60 Z"
         fill={colour}
