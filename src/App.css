@@ -230,7 +230,7 @@ button[type="submit"],
   position: absolute;
   left: 0;
   right: 0;
-  border-top: 1px solid #4a4b56;
+  border-top: 2px solid #aab0c0;
 }
 
 .row-label {
@@ -256,15 +256,15 @@ button[type="submit"],
   top: 0;
   bottom: 0;
   width: 1px;
-  border-left: 1px dashed #2e303a;
+  border-left: 1px dashed #23242c;
 }
 
 .wall-border {
   position: absolute;
   left: 0;
   right: 0;
-  height: 2px;
-  background: #4a4b56;
+  height: 3px;
+  background: #cfd2db;
 }
 
 .slot {

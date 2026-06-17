@@ -2,20 +2,36 @@ import type { WallSection } from "../types/domain";
 
 const PX_PER_METER = 220;
 
-// True-to-scale vertical axis: each height level sits at its real-world metre
-// position, which is what produces the reference planogram's two tight
-// clusters (2.0–2.2m, 1.0–1.2m) separated by a large gap, rather than 6 evenly
-// stacked rows.
-const PX_PER_METER_V = 900;
-const WALL_TOP_M = 2.3;
-const WALL_BOTTOM_M = 0.85;
-
 // Bare grid only, no garments/icons — getting the metal-line/meter-line
 // geometry right against the reference sketches before anything else.
 const HEIGHT_LEVELS = [2.2, 2.1, 2.0, 1.2, 1.1, 1.0] as const;
 
+// Schematic (not literal metric) vertical scale: lines within a cluster sit
+// close together — just far enough apart to hang one row of garments — and
+// the gap between the 2.0 and 1.2 lines is sized the same way, rather than
+// the much larger true-to-scale 0.8m gap.
+const TOP_MARGIN_PX = 30;
+const BOTTOM_MARGIN_PX = 30;
+const TIGHT_GAP_PX = 70;
+const CLUSTER_GAP_PX = 150;
+
+const HEIGHT_Y: Record<number, number> = (() => {
+  const y: Record<number, number> = {};
+  let cursor = TOP_MARGIN_PX;
+  HEIGHT_LEVELS.forEach((height, i) => {
+    if (i === 0) {
+      y[height] = cursor;
+    } else {
+      const prev = HEIGHT_LEVELS[i - 1];
+      cursor += prev - height > 0.5 ? CLUSTER_GAP_PX : TIGHT_GAP_PX;
+      y[height] = cursor;
+    }
+  });
+  return y;
+})();
+
 function yForHeight(height: number): number {
-  return (WALL_TOP_M - height) * PX_PER_METER_V;
+  return HEIGHT_Y[height];
 }
 
 interface Props {
@@ -24,7 +40,7 @@ interface Props {
 
 export function WallView({ section }: Props) {
   const widthM = section.endMeter - section.startMeter;
-  const gridHeight = (WALL_TOP_M - WALL_BOTTOM_M) * PX_PER_METER_V;
+  const gridHeight = yForHeight(HEIGHT_LEVELS[HEIGHT_LEVELS.length - 1]) + BOTTOM_MARGIN_PX;
 
   return (
     <div className="wall-view">
