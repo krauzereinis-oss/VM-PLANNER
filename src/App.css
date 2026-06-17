@@ -1,0 +1,287 @@
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+}
+
+nav button {
+  background: #24252c;
+  border: 1px solid #34353f;
+  color: #ccc;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+nav button.active {
+  background: #3a5a78;
+  color: #fff;
+}
+
+.panel {
+  background: #1d1e25;
+  border: 1px solid #2e303a;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.hint {
+  color: #9aa;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.hint-inline {
+  color: #889;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+form.panel label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #cfd0d6;
+}
+
+form.panel input,
+form.panel select {
+  display: block;
+  margin-top: 4px;
+  width: 100%;
+  padding: 8px;
+  background: #111216;
+  border: 1px solid #34353f;
+  border-radius: 6px;
+  color: #eee;
+}
+
+form.panel label.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+form.panel label.checkbox input {
+  width: auto;
+}
+
+button[type="submit"],
+.row button {
+  background: #3a5a78;
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.danger {
+  background: #7a3a3a;
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.row label {
+  font-size: 14px;
+  color: #cfd0d6;
+}
+
+.row input {
+  display: block;
+  margin-top: 4px;
+  padding: 6px 8px;
+  background: #111216;
+  border: 1px solid #34353f;
+  border-radius: 6px;
+  color: #eee;
+  width: 100px;
+}
+
+.row label.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+}
+
+.row label.checkbox input {
+  width: auto;
+}
+
+.section-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-bottom: 1px solid #2e303a;
+}
+
+.section-row span {
+  flex: 1;
+}
+
+.upload-btn {
+  background: #2a3f54;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.garment-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.garment-card {
+  background: #111216;
+  border: 1px solid #2e303a;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+
+.garment-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  background: #08090c;
+  border-radius: 4px;
+}
+
+.garment-meta {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  margin: 8px 0;
+  gap: 2px;
+}
+
+.badge {
+  background: #2a3f54;
+  border-radius: 4px;
+  padding: 1px 6px;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+.warning {
+  background: #5a3a1a;
+  border: 1px solid #8a5a2a;
+  color: #ffd9a0;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.wall-view {
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+
+.wall-grid {
+  position: relative;
+  background: #0c0d10;
+  border: 1px solid #2e303a;
+  border-radius: 4px;
+}
+
+.wall-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-bottom: 1px dashed #2e303a;
+}
+
+.row-label {
+  position: absolute;
+  left: -42px;
+  top: 4px;
+  font-size: 11px;
+  color: #889;
+  width: 36px;
+  text-align: right;
+}
+
+.upright {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #3a3b46;
+}
+
+.slot {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  border: 2px solid #444;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #1a1b21;
+}
+
+.slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.empty-slot {
+  background: repeating-linear-gradient(45deg, #1a1b21, #1a1b21 6px, #20212a 6px, #20212a 12px);
+}
+
+.shelf-slot {
+  top: 4px;
+  bottom: 4px;
+  border: 1px solid #5a5a4a;
+  background: repeating-linear-gradient(45deg, #2a2a20, #2a2a20 5px, #34342a 5px, #34342a 10px);
+}
+
+.layer-indicator {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  font-size: 10px;
+  color: #ffd9a0;
+}
