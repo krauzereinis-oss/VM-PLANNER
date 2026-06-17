@@ -6,9 +6,7 @@ const PX_PER_METER = 220;
 // Pants always take 0.25m of horizontal hanging space, regardless of which
 // mount they hang from.
 const PANTS_WIDTH_M = 0.25;
-// Two SKU colours to demonstrate the stepper's 1-or-2-SKU capability — angle
-// arm always repeats a single SKU, so it only ever uses PANTS_SKU_COLOURS[0].
-const PANTS_SKU_COLOURS = ["#3a5a78", "#5a7848"];
+const PANTS_ICON_HEIGHT_PX = 100;
 
 // Bare grid only, no garments/icons — getting the metal-line/meter-line
 // geometry right against the reference sketches before anything else.
@@ -49,15 +47,8 @@ interface Props {
 export function WallView({ section }: Props) {
   const widthM = section.endMeter - section.startMeter;
   const gridHeight = yForHeight(HEIGHT_LEVELS[HEIGHT_LEVELS.length - 1]) + BOTTOM_MARGIN_PX;
-  const pantsSlotCount = Math.floor(widthM / PANTS_WIDTH_M);
-
-  // Stepper @ 1.2: hangs down to the floor border, can mix up to 2 SKUs.
-  const stepperPantsTop = yForHeight(1.2);
-  const stepperPantsHeight = gridHeight - stepperPantsTop;
-
-  // Angle arm @ 2.2: hangs down to the 1.2 line, always a single SKU.
-  const angleArmPantsTop = yForHeight(2.2);
-  const angleArmPantsHeight = yForHeight(1.2) - angleArmPantsTop;
+  const pantsLeft = 0.5 * PX_PER_METER;
+  const pantsWidthPx = PANTS_WIDTH_M * PX_PER_METER;
 
   return (
     <div className="wall-view">
@@ -88,23 +79,19 @@ export function WallView({ section }: Props) {
               if (Number.isInteger(meterPos)) return null;
               return <div key={`h-${i}`} className="upright-half" style={{ left: meterPos * PX_PER_METER }} />;
             })}
-            <div className="garment-row" style={{ top: angleArmPantsTop, height: angleArmPantsHeight }}>
-              {Array.from({ length: pantsSlotCount }).map((_, i) => (
-                <div key={`pants-angle-${i}`} className="garment-slot" style={{ width: PANTS_WIDTH_M * PX_PER_METER }}>
-                  <PantsIcon width={0.25} colour={PANTS_SKU_COLOURS[0]} height={angleArmPantsHeight - 16} />
-                </div>
-              ))}
+            {/* Angle arm @ 2.2 — pants hang directly off this metal line. */}
+            <div
+              className="pants-mount"
+              style={{ top: yForHeight(2.2), left: pantsLeft, width: pantsWidthPx }}
+            >
+              <PantsIcon width={0.25} colour="#3a5a78" height={PANTS_ICON_HEIGHT_PX} />
             </div>
-            <div className="garment-row" style={{ top: stepperPantsTop, height: stepperPantsHeight }}>
-              {Array.from({ length: pantsSlotCount }).map((_, i) => (
-                <div key={`pants-stepper-${i}`} className="garment-slot" style={{ width: PANTS_WIDTH_M * PX_PER_METER }}>
-                  <PantsIcon
-                    width={0.25}
-                    colour={PANTS_SKU_COLOURS[Math.floor(i / 2) % 2]}
-                    height={stepperPantsHeight - 16}
-                  />
-                </div>
-              ))}
+            {/* Stepper @ 1.2 — pants hang directly off this metal line. */}
+            <div
+              className="pants-mount"
+              style={{ top: yForHeight(1.2), left: pantsLeft, width: pantsWidthPx }}
+            >
+              <PantsIcon width={0.25} colour="#5a7848" height={PANTS_ICON_HEIGHT_PX} />
             </div>
           </div>
         </div>

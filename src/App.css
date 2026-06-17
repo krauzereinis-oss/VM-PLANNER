@@ -303,19 +303,14 @@ button[type="submit"],
   border-left: 1px dashed #3a3c46;
 }
 
-.garment-row {
+.pants-mount {
   position: absolute;
-  left: 0;
   display: flex;
+  justify-content: center;
 }
 
-.garment-slot {
-  flex-shrink: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  border-right: 1px solid #1c1d24;
-  padding-top: 4px;
+.pants-mount svg {
+  display: block;
 }
 
 .wall-border {
