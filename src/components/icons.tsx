@@ -55,15 +55,17 @@ export function PantsIcon({ widthPx, colour = "#888", faded, height = 64 }: Pant
       preserveAspectRatio="none"
     >
       <path
-        d="M14 0 L50 0 L58 14 L44 80 L47 92 L36 92 L34 80 L32 22 L30 80 L28 92 L17 92 L20 80 L6 14 Z"
+        d="M14 0 L50 0 Q58 4 56 14 C53 35 49 55 46 76 Q50 84 42 88 Q38 92 34 88 L33 76
+           C33 55 32 35 32 16 C32 35 31 55 31 76 L30 88 Q26 92 22 88 Q18 84 18 76
+           C15 55 11 35 8 14 Q6 4 14 0 Z"
         fill={colour}
         stroke={STROKE}
         strokeWidth="2"
       />
       {/* drawstring */}
-      <path d="M29 3 L29 12 M35 3 L35 12" stroke={STROKE} strokeWidth="1.5" fill="none" />
+      <path d="M29 4 L28 20 M35 4 L36 20" stroke={STROKE} strokeWidth="1.5" fill="none" />
       {/* pocket lines */}
-      <path d="M11 9 L19 18 M53 9 L45 18" stroke={STROKE} strokeWidth="1.5" fill="none" />
+      <path d="M14 18 L22 28 M50 18 L42 28" stroke={STROKE} strokeWidth="1.5" fill="none" />
     </svg>
   );
 }
