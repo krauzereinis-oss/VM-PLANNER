@@ -53,7 +53,7 @@ function App() {
               <p className="hint">No wall sections yet — add one in Wall Setup to get started.</p>
             )}
             {sections.map((s) => (
-              <WallView key={s.id} section={s} garments={garments} />
+              <WallView key={s.id} section={s} />
             ))}
           </div>
         )}

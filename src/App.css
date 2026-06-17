@@ -226,11 +226,11 @@ button[type="submit"],
   border-radius: 4px;
 }
 
-.wall-row {
+.height-line {
   position: absolute;
   left: 0;
   right: 0;
-  border-bottom: 1px dashed #2e303a;
+  border-top: 1px solid #4a4b56;
 }
 
 .row-label {
