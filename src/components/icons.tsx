@@ -39,8 +39,8 @@ export function FrontIcon({ width, colour = "#888", faded, height = 64 }: IconPr
   );
 }
 
-/** Pants silhouette — straight waistband with two distinct legs separated by a
- * crotch notch that reaches almost to the waist, the way real pants/jeans hang.
+/** Jogger-style pants outline — waistband with drawstring, flared hips, side
+ * pockets, tapered legs and elastic ankle cuffs (matches the reference clipart).
  * viewBox is cropped tight to the path's own bounds (no margin) so the waistband
  * sits exactly at the top of the box — required to hang flush against its mount
  * line — and the box stretches to fill whatever height it's given, since width
@@ -48,18 +48,22 @@ export function FrontIcon({ width, colour = "#888", faded, height = 64 }: IconPr
 export function PantsIcon({ widthPx, colour = "#888", faded, height = 64 }: PantsIconProps) {
   return (
     <svg
-      viewBox="16 0 32 58"
+      viewBox="6 0 52 92"
       width={widthPx}
       height={height}
       opacity={faded ? 0.35 : 1}
       preserveAspectRatio="none"
     >
       <path
-        d="M16 0 H48 V58 L36 58 L32 10 L28 58 L16 58 Z"
+        d="M14 0 L50 0 L58 14 L44 80 L47 92 L36 92 L34 80 L32 22 L30 80 L28 92 L17 92 L20 80 L6 14 Z"
         fill={colour}
         stroke={STROKE}
-        strokeWidth="1.5"
+        strokeWidth="2"
       />
+      {/* drawstring */}
+      <path d="M29 3 L29 12 M35 3 L35 12" stroke={STROKE} strokeWidth="1.5" fill="none" />
+      {/* pocket lines */}
+      <path d="M11 9 L19 18 M53 9 L45 18" stroke={STROKE} strokeWidth="1.5" fill="none" />
     </svg>
   );
 }
