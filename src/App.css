@@ -377,25 +377,6 @@ button[type="submit"],
   z-index: 2;
 }
 
-/* Marks a mount where the stepper is carrying 2 SKUs in the same slot, per the
-   rule that a 2-SKU stepper must always show a "2" somewhere on the garment. */
-.sku-badge {
-  position: absolute;
-  top: -9px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #ffd9a0;
-  color: #1a1b21;
-  font-size: 11px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-}
 
 .legend {
   display: flex;

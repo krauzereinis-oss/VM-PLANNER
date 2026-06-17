@@ -98,12 +98,11 @@ export function WallView({ section }: Props) {
             </div>
             {/* Stepper @ 1.2 — the stepper arm is Z-shaped, so 2 SKUs share the
                 same 0.25m slot, one hung in front and one behind (not side by
-                side); a stepper showing 2 SKUs must always carry a "2" marker. */}
+                side); the peeking back garment is itself the "2 SKUs" signal. */}
             <div
               className="pants-mount stepper-2sku"
               style={{ top: yForHeight(1.2), left: pantsLeft, width: pantsWidthPx }}
             >
-              <span className="sku-badge">2</span>
               <div className="stepper-2sku-back">
                 <PantsIcon widthPx={pantsWidthPx} colour="#9a9ea8" height={stepperPantsHeight} />
               </div>
