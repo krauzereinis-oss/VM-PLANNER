@@ -39,21 +39,23 @@ export function FrontIcon({ width, colour = "#888", faded, height = 64 }: IconPr
   );
 }
 
-/** Pants/shorts silhouette, tapered — the angled leg shape from the angle-arm sketch.
- * viewBox is cropped tight to the path's own bounds (no margin) so the waistband sits
- * exactly at the top of the box — required to hang flush against its mount line — and
- * the box stretches to fill whatever height it's given, since width is fixed at 0.25m. */
+/** Pants silhouette — straight waistband with two distinct legs separated by a
+ * crotch notch that reaches almost to the waist, the way real pants/jeans hang.
+ * viewBox is cropped tight to the path's own bounds (no margin) so the waistband
+ * sits exactly at the top of the box — required to hang flush against its mount
+ * line — and the box stretches to fill whatever height it's given, since width
+ * is fixed at 0.25m. */
 export function PantsIcon({ widthPx, colour = "#888", faded, height = 64 }: PantsIconProps) {
   return (
     <svg
-      viewBox="18 4 28 56"
+      viewBox="16 0 32 58"
       width={widthPx}
       height={height}
       opacity={faded ? 0.35 : 1}
       preserveAspectRatio="none"
     >
       <path
-        d="M18 4 H46 L44 60 L34 60 L32 24 L30 60 L20 60 Z"
+        d="M16 0 H48 V58 L36 58 L32 10 L28 58 L16 58 Z"
         fill={colour}
         stroke={STROKE}
         strokeWidth="1.5"
