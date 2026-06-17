@@ -9,6 +9,13 @@ interface IconProps {
   height?: number;
 }
 
+interface PantsIconProps {
+  widthPx: number;
+  colour?: string;
+  faded?: boolean;
+  height?: number;
+}
+
 const STROKE = "#1a1b21";
 
 /** Front-facing garment on a hanger (Stepper / Angle Arm), facing the viewer — a tee/hoodie silhouette. */
@@ -32,11 +39,19 @@ export function FrontIcon({ width, colour = "#888", faded, height = 64 }: IconPr
   );
 }
 
-/** Pants/shorts silhouette, tapered — the angled leg shape from the angle-arm sketch. Scales as a
- * square (width follows height) so it stays recognizable instead of stretching into a sliver. */
-export function PantsIcon({ colour = "#888", faded, height = 64 }: IconProps) {
+/** Pants/shorts silhouette, tapered — the angled leg shape from the angle-arm sketch.
+ * viewBox is cropped tight to the path's own bounds (no margin) so the waistband sits
+ * exactly at the top of the box — required to hang flush against its mount line — and
+ * the box stretches to fill whatever height it's given, since width is fixed at 0.25m. */
+export function PantsIcon({ widthPx, colour = "#888", faded, height = 64 }: PantsIconProps) {
   return (
-    <svg viewBox="0 0 64 64" width={height} height={height} opacity={faded ? 0.35 : 1}>
+    <svg
+      viewBox="18 4 28 56"
+      width={widthPx}
+      height={height}
+      opacity={faded ? 0.35 : 1}
+      preserveAspectRatio="none"
+    >
       <path
         d="M18 4 H46 L44 60 L34 60 L32 24 L30 60 L20 60 Z"
         fill={colour}

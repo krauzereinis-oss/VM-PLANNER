@@ -305,7 +305,6 @@ button[type="submit"],
 
 .pants-mount {
   position: absolute;
-  transform: translateX(-50%);
 }
 
 .pants-mount svg {
