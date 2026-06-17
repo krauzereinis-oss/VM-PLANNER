@@ -247,8 +247,8 @@ button[type="submit"],
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 1px;
-  background: #3a3b46;
+  width: 2px;
+  background: #9a9eac;
 }
 
 .upright-half {
@@ -256,7 +256,7 @@ button[type="submit"],
   top: 0;
   bottom: 0;
   width: 1px;
-  border-left: 1px dashed #23242c;
+  border-left: 1px dashed #3a3c46;
 }
 
 .wall-border {
