@@ -258,8 +258,8 @@ button[type="submit"],
 
 .wall-grid {
   position: relative;
-  background: #0c0d10;
-  border: 1px solid #2e303a;
+  background: #f5f5f2;
+  border: 1px solid #c7c7c0;
   border-radius: 4px;
 }
 
@@ -267,7 +267,7 @@ button[type="submit"],
   position: absolute;
   left: 0;
   right: 0;
-  border-top: 2px solid #aab0c0;
+  border-top: 2px solid #777;
 }
 
 .height-line.mount-line {
@@ -296,7 +296,7 @@ button[type="submit"],
   top: 0;
   bottom: 0;
   width: 2px;
-  background: #9a9eac;
+  background: #999;
 }
 
 .upright-half {
@@ -304,7 +304,7 @@ button[type="submit"],
   top: 0;
   bottom: 0;
   width: 1px;
-  border-left: 1px dashed #3a3c46;
+  border-left: 1px dashed #bbb;
 }
 
 .pants-mount {
@@ -321,7 +321,7 @@ button[type="submit"],
   left: 0;
   right: 0;
   height: 3px;
-  background: #cfd2db;
+  background: #555;
 }
 
 .slot {
