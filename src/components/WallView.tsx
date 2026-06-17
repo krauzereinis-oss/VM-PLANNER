@@ -6,7 +6,8 @@ const PX_PER_METER = 220;
 // Pants always take 0.25m of horizontal hanging space, regardless of which
 // mount they hang from.
 const PANTS_WIDTH_M = 0.25;
-const PANTS_ICON_HEIGHT_PX = 100;
+// Leave a small reveal so the hem doesn't merge into the next metal/floor line.
+const PANTS_HEM_CLEARANCE_PX = 10;
 
 // Bare grid only, no garments/icons — getting the metal-line/meter-line
 // geometry right against the reference sketches before anything else.
@@ -47,8 +48,14 @@ interface Props {
 export function WallView({ section }: Props) {
   const widthM = section.endMeter - section.startMeter;
   const gridHeight = yForHeight(HEIGHT_LEVELS[HEIGHT_LEVELS.length - 1]) + BOTTOM_MARGIN_PX;
-  const pantsLeft = 0.5 * PX_PER_METER;
-  const pantsWidthPx = PANTS_WIDTH_M * PX_PER_METER;
+  // Pants render as a square that scales with height, so position by centre
+  // point (left edge of the 0.25m slot + half its width) rather than by the
+  // slot's own width.
+  const pantsCenter = 0.5 * PX_PER_METER + (PANTS_WIDTH_M * PX_PER_METER) / 2;
+  // Angle arm @ 2.2 hangs almost down to the 1.2 line; stepper @ 1.2 hangs
+  // almost down to the floor.
+  const angleArmPantsHeight = yForHeight(1.2) - yForHeight(2.2) - PANTS_HEM_CLEARANCE_PX;
+  const stepperPantsHeight = gridHeight - yForHeight(1.2) - PANTS_HEM_CLEARANCE_PX;
 
   return (
     <div className="wall-view">
@@ -80,18 +87,12 @@ export function WallView({ section }: Props) {
               return <div key={`h-${i}`} className="upright-half" style={{ left: meterPos * PX_PER_METER }} />;
             })}
             {/* Angle arm @ 2.2 — pants hang directly off this metal line. */}
-            <div
-              className="pants-mount"
-              style={{ top: yForHeight(2.2), left: pantsLeft, width: pantsWidthPx }}
-            >
-              <PantsIcon width={0.25} colour="#3a5a78" height={PANTS_ICON_HEIGHT_PX} />
+            <div className="pants-mount" style={{ top: yForHeight(2.2), left: pantsCenter }}>
+              <PantsIcon width={0.25} colour="#3a5a78" height={angleArmPantsHeight} />
             </div>
             {/* Stepper @ 1.2 — pants hang directly off this metal line. */}
-            <div
-              className="pants-mount"
-              style={{ top: yForHeight(1.2), left: pantsLeft, width: pantsWidthPx }}
-            >
-              <PantsIcon width={0.25} colour="#5a7848" height={PANTS_ICON_HEIGHT_PX} />
+            <div className="pants-mount" style={{ top: yForHeight(1.2), left: pantsCenter }}>
+              <PantsIcon width={0.25} colour="#5a7848" height={stepperPantsHeight} />
             </div>
           </div>
         </div>
