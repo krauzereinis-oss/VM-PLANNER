@@ -63,9 +63,9 @@ export function PantsIcon({ widthPx, colour = "#888", faded, height = 64 }: Pant
         strokeWidth="2"
       />
       {/* drawstring */}
-      <path d="M29 4 L28 20 M35 4 L36 20" stroke="#cfd0d6" strokeWidth="1.5" fill="none" />
+      <path d="M29 4 L28 20 M35 4 L36 20" stroke={STROKE} strokeWidth="1.5" fill="none" />
       {/* pocket lines */}
-      <path d="M14 18 L22 28 M50 18 L42 28" stroke="#cfd0d6" strokeWidth="1.5" fill="none" />
+      <path d="M14 18 L22 28 M50 18 L42 28" stroke={STROKE} strokeWidth="1.5" fill="none" />
     </svg>
   );
 }

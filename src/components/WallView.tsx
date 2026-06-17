@@ -94,11 +94,11 @@ export function WallView({ section }: Props) {
             })}
             {/* Angle arm @ 2.2 — pants hang directly off this metal line. */}
             <div className="pants-mount" style={{ top: yForHeight(2.2), left: pantsLeft }}>
-              <PantsIcon widthPx={pantsWidthPx} colour="#1a1a1a" height={angleArmPantsHeight} />
+              <PantsIcon widthPx={pantsWidthPx} colour="#f0f0f0" height={angleArmPantsHeight} />
             </div>
             {/* Stepper @ 1.2 — pants hang directly off this metal line. */}
             <div className="pants-mount" style={{ top: yForHeight(1.2), left: pantsLeft }}>
-              <PantsIcon widthPx={pantsWidthPx} colour="#1a1a1a" height={stepperPantsHeight} />
+              <PantsIcon widthPx={pantsWidthPx} colour="#f0f0f0" height={stepperPantsHeight} />
             </div>
           </div>
         </div>
