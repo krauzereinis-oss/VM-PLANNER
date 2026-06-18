@@ -357,23 +357,23 @@ button[type="submit"],
   color: #ffd9a0;
 }
 
-/* Stepper's arm is Z-shaped: a 2nd SKU hangs behind the first in the same
-   0.25m slot rather than next to it, so just offset it a little to peek out. */
+/* Stepper's arm is Z-shaped: the back SKU hangs flush off the 1.2 line, the
+   front SKU hangs lower off the Z-step (top set inline per garment height),
+   and both share the same 0.25m slot with a slight sideways peek. */
 .stepper-2sku {
   overflow: visible;
 }
 
 .stepper-2sku-back {
   position: absolute;
-  top: 10px;
-  left: 12px;
+  top: 0;
+  left: 0;
   z-index: 1;
 }
 
 .stepper-2sku-front {
   position: absolute;
-  top: 0;
-  left: 0;
+  left: 10px;
   z-index: 2;
 }
 

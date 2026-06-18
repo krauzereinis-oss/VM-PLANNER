@@ -8,6 +8,9 @@ const PX_PER_METER = 340;
 const PANTS_WIDTH_M = 0.25;
 // Leave a small reveal so the hem doesn't merge into the next metal/floor line.
 const PANTS_HEM_CLEARANCE_PX = 10;
+// The stepper's Z-shaped arm hooks the front SKU lower than the back one;
+// the back SKU is the one that actually hangs flush off the 1.2 line.
+const STEPPER_FRONT_DROP_PX = 26;
 
 // Bare grid only, no garments/icons — getting the metal-line/meter-line
 // geometry right against the reference sketches before anything else.
@@ -58,6 +61,7 @@ export function WallView({ section }: Props) {
   // almost down to the floor.
   const angleArmPantsHeight = yForHeight(1.2) - yForHeight(2.2) - PANTS_HEM_CLEARANCE_PX;
   const stepperPantsHeight = gridHeight - yForHeight(1.2) - PANTS_HEM_CLEARANCE_PX;
+  const stepperFrontPantsHeight = stepperPantsHeight - STEPPER_FRONT_DROP_PX;
 
   return (
     <div className="wall-view">
@@ -98,7 +102,8 @@ export function WallView({ section }: Props) {
             </div>
             {/* Stepper @ 1.2 — the stepper arm is Z-shaped, so 2 SKUs share the
                 same 0.25m slot, one hung in front and one behind (not side by
-                side); the peeking back garment is itself the "2 SKUs" signal. */}
+                side); the back SKU hangs flush off 1.2, the front SKU hangs
+                lower off the Z-step, and that drop is itself the "2 SKUs" signal. */}
             <div
               className="pants-mount stepper-2sku"
               style={{ top: yForHeight(1.2), left: pantsLeft, width: pantsWidthPx }}
@@ -106,8 +111,8 @@ export function WallView({ section }: Props) {
               <div className="stepper-2sku-back">
                 <PantsIcon widthPx={pantsWidthPx} colour="#9a9ea8" height={stepperPantsHeight} />
               </div>
-              <div className="stepper-2sku-front">
-                <PantsIcon widthPx={pantsWidthPx} colour="#f0f0f0" height={stepperPantsHeight} />
+              <div className="stepper-2sku-front" style={{ top: STEPPER_FRONT_DROP_PX }}>
+                <PantsIcon widthPx={pantsWidthPx} colour="#f0f0f0" height={stepperFrontPantsHeight} />
               </div>
             </div>
           </div>
