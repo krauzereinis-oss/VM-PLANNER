@@ -63,9 +63,9 @@ export function WallView({ section }: Props) {
   const angleArmPantsHeight = yForHeight(1.2) - yForHeight(2.2) - PANTS_HEM_CLEARANCE_PX;
   const stepperPantsHeight = gridHeight - yForHeight(1.2) - PANTS_HEM_CLEARANCE_PX;
   const stepperFrontPantsHeight = stepperPantsHeight - STEPPER_FRONT_DROP_PX;
-  // T-shirt angle arm @ 2.2 hangs down to the 1.0 line; t-shirt stepper @ 1.0
-  // hangs almost down to the floor.
-  const angleArmTshirtHeight = yForHeight(1.0) - yForHeight(2.2) - PANTS_HEM_CLEARANCE_PX;
+  // T-shirts and pants are the same length on the angle arm; the stepper @
+  // 1.0 hangs t-shirts almost down to the floor.
+  const angleArmTshirtHeight = angleArmPantsHeight;
   const stepperTshirtHeight = gridHeight - yForHeight(1.0) - PANTS_HEM_CLEARANCE_PX;
   const stepperFrontTshirtHeight = stepperTshirtHeight - STEPPER_FRONT_DROP_PX;
 

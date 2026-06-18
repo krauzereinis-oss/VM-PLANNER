@@ -77,20 +77,20 @@ interface TshirtIconProps {
   height?: number;
 }
 
-/** Round-collar short-sleeve tee — collar notch, sloped shoulders, sleeve
- * corners, underarm notch, straight sides, flat hem. viewBox top is at y=0
- * so the collar sits flush against its mount line. */
+/** Round-collar short-sleeve tee — round collar notch, sloped shoulders,
+ * sleeve caps, underarm notch, straight sides, flat hem. viewBox top is at
+ * y=0 so the collar sits flush against its mount line. */
 export function TshirtIcon({ widthPx, colour = "#888", faded, height = 64 }: TshirtIconProps) {
   return (
     <svg
-      viewBox="4 0 56 56"
+      viewBox="0 0 64 66"
       width={widthPx}
       height={height}
       opacity={faded ? 0.35 : 1}
       preserveAspectRatio="none"
     >
       <path
-        d="M22 0 Q32 12 42 0 L54 12 L60 22 L46 28 L46 56 L18 56 L18 28 L4 22 L10 12 Z"
+        d="M24 4 Q32 16 40 4 L50 8 Q62 8 58 22 L46 20 L46 66 L18 66 L18 20 L6 22 Q2 8 14 8 Z"
         fill={colour}
         stroke={STROKE}
         strokeWidth="1.5"
