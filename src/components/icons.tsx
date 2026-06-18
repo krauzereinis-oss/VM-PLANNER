@@ -70,6 +70,35 @@ export function PantsIcon({ widthPx, colour = "#888", faded, height = 64 }: Pant
   );
 }
 
+interface TshirtIconProps {
+  widthPx: number;
+  colour?: string;
+  faded?: boolean;
+  height?: number;
+}
+
+/** Round-collar short-sleeve tee — collar notch, sloped shoulders, sleeve
+ * corners, underarm notch, straight sides, flat hem. viewBox top is at y=0
+ * so the collar sits flush against its mount line. */
+export function TshirtIcon({ widthPx, colour = "#888", faded, height = 64 }: TshirtIconProps) {
+  return (
+    <svg
+      viewBox="4 0 56 56"
+      width={widthPx}
+      height={height}
+      opacity={faded ? 0.35 : 1}
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M22 0 Q32 12 42 0 L54 12 L60 22 L46 28 L46 56 L18 56 L18 28 L4 22 L10 12 Z"
+        fill={colour}
+        stroke={STROKE}
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
+
 /** D-Bar sideways hang — a fan of thin parallel strips, like several garments hung edge-on. */
 export function SidewaysIcon({ width, colour = "#888", faded }: IconProps) {
   const w = width === 0.5 ? 64 : 32;

@@ -270,7 +270,12 @@ button[type="submit"],
   border-top: 2px solid #aab0c0;
 }
 
-.height-line.mount-line {
+.mount-tick {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  border-top: 2px solid #aab0c0;
   z-index: 2;
 }
 
@@ -307,12 +312,12 @@ button[type="submit"],
   border-left: 1px dashed #3a3c46;
 }
 
-.pants-mount {
+.garment-mount {
   position: absolute;
   z-index: 1;
 }
 
-.pants-mount svg {
+.garment-mount svg {
   display: block;
 }
 
