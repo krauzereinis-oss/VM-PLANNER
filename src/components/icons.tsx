@@ -77,24 +77,27 @@ interface TshirtIconProps {
   height?: number;
 }
 
-/** Round-collar short-sleeve tee — round collar notch, sloped shoulders,
- * sleeve caps, underarm notch, straight sides, flat hem. viewBox top is at
- * y=0 so the collar sits flush against its mount line. */
+/** Polo-style short-sleeve shirt — pointed V collar with a button placket,
+ * sloped shoulders, rounded sleeve caps, underarm notch, straight sides,
+ * flat hem. The collar points sit exactly at y=0 so the garment hangs flush
+ * against its mount line. */
 export function TshirtIcon({ widthPx, colour = "#888", faded, height = 64 }: TshirtIconProps) {
   return (
     <svg
-      viewBox="0 0 64 66"
+      viewBox="0 0 64 62"
       width={widthPx}
       height={height}
       opacity={faded ? 0.35 : 1}
       preserveAspectRatio="none"
     >
       <path
-        d="M24 4 Q32 16 40 4 L50 8 Q62 8 58 22 L46 20 L46 66 L18 66 L18 20 L6 22 Q2 8 14 8 Z"
+        d="M24 0 L32 12 L40 0 L50 4 Q62 4 58 18 L46 16 L46 62 L18 62 L18 16 L6 18 Q2 4 14 4 Z"
         fill={colour}
         stroke={STROKE}
         strokeWidth="1.5"
       />
+      {/* button placket */}
+      <path d="M32 12 L32 26" stroke={STROKE} strokeWidth="1.5" fill="none" />
     </svg>
   );
 }
