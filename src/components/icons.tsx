@@ -79,25 +79,28 @@ interface TshirtIconProps {
 
 /** Polo-style short-sleeve shirt — pointed V collar with a button placket,
  * sloped shoulders, rounded sleeve caps, underarm notch, straight sides,
- * flat hem. The collar points sit exactly at y=0 so the garment hangs flush
- * against its mount line. */
+ * flat hem. The collar points sit at y=0 so the garment hangs flush against
+ * its mount line. Unlike PantsIcon, this uses "meet" instead of stretching
+ * to fill the box — a t-shirt has a fixed real-world length, so it should
+ * keep its true proportions and leave empty hanging space below rather than
+ * distort to fill whatever height the mount has available. */
 export function TshirtIcon({ widthPx, colour = "#888", faded, height = 64 }: TshirtIconProps) {
   return (
     <svg
-      viewBox="0 0 64 62"
+      viewBox="0 0 64 60"
       width={widthPx}
       height={height}
       opacity={faded ? 0.35 : 1}
-      preserveAspectRatio="none"
+      preserveAspectRatio="xMidYMin meet"
     >
       <path
-        d="M24 0 L32 12 L40 0 L50 4 Q62 4 58 18 L46 16 L46 62 L18 62 L18 16 L6 18 Q2 4 14 4 Z"
+        d="M22 0 L32 14 L42 0 L52 4 C60 6 60 16 56 20 L46 17 L46 60 L18 60 L18 17 L8 20 C4 16 4 6 12 4 Z"
         fill={colour}
         stroke={STROKE}
         strokeWidth="1.5"
       />
       {/* button placket */}
-      <path d="M32 12 L32 26" stroke={STROKE} strokeWidth="1.5" fill="none" />
+      <path d="M32 14 L32 26" stroke={STROKE} strokeWidth="1.5" fill="none" />
     </svg>
   );
 }
